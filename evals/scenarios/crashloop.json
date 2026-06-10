@@ -1,0 +1,60 @@
+{
+  "name": "crashloop",
+  "namespace": "default",
+  "service": "reviews",
+  "expected_root_cause": "reviews-v1 pod is in CrashLoopBackOff: the reviews container has restarted 14 times, only 1 of 2 containers is ready, and the Ready condition is False with Reason=ContainersNotReady citing the reviews container. The reviews application container is crashing repeatedly.",
+  "fixtures": {
+    "kubectl_get_pods": {
+      "namespace": "default",
+      "pod_count": 6,
+      "pods": [
+        {
+          "name": "productpage-v1-7b8f9c5d4-abcde",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:03Z"
+        },
+        {
+          "name": "details-v1-6c5d4b3a2-fghij",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:04Z"
+        },
+        {
+          "name": "ratings-v1-5b4c3d2e1-klmno",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:04Z"
+        },
+        {
+          "name": "reviews-v1-4a3b2c1d0-pqrst",
+          "phase": "Running",
+          "ready": "1/2",
+          "restarts": 14,
+          "started_at": "2026-06-10T14:12:05Z",
+          "conditions": [
+            "Ready=False (ContainersNotReady): containers with unready status: [reviews]",
+            "ContainersReady=False (ContainersNotReady): containers with unready status: [reviews]"
+          ]
+        },
+        {
+          "name": "reviews-v2-3z2y1x0w9-uvwxy",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:05Z"
+        },
+        {
+          "name": "reviews-v3-2y1x0w9v8-zabcd",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:06Z"
+        }
+      ]
+    }
+  }
+}

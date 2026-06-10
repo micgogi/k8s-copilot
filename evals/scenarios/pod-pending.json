@@ -1,0 +1,58 @@
+{
+  "name": "pod-pending",
+  "namespace": "default",
+  "service": "productpage",
+  "expected_root_cause": "productpage-v1 pod is stuck in Pending because the scheduler cannot place it: PodScheduled=False with Reason=Unschedulable, message says 0/3 nodes have sufficient memory. Resource pressure / no node satisfies the pod's memory request is the root cause.",
+  "fixtures": {
+    "kubectl_get_pods": {
+      "namespace": "default",
+      "pod_count": 6,
+      "pods": [
+        {
+          "name": "productpage-v1-7b8f9c5d4-abcde",
+          "phase": "Pending",
+          "ready": "0/0",
+          "restarts": 0,
+          "conditions": [
+            "PodScheduled=False (Unschedulable): 0/3 nodes are available: 3 Insufficient memory."
+          ]
+        },
+        {
+          "name": "details-v1-6c5d4b3a2-fghij",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:04Z"
+        },
+        {
+          "name": "ratings-v1-5b4c3d2e1-klmno",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:04Z"
+        },
+        {
+          "name": "reviews-v1-4a3b2c1d0-pqrst",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:05Z"
+        },
+        {
+          "name": "reviews-v2-3z2y1x0w9-uvwxy",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:05Z"
+        },
+        {
+          "name": "reviews-v3-2y1x0w9v8-zabcd",
+          "phase": "Running",
+          "ready": "2/2",
+          "restarts": 0,
+          "started_at": "2026-06-10T14:12:06Z"
+        }
+      ]
+    }
+  }
+}
